@@ -47,18 +47,16 @@ public struct Money {
     }
     
     public func add(_ to: Money) -> Money {
-        var toMoney = to
         if (self.currency != to.currency) {
-            toMoney = self.convert(to.currency)
+            to = self.convert(to.currency)
         }
-        return Money(amount: self.amount + to.amount, currency: toMoney.currency)
+        return Money(amount: self.amount + to.amount, currency: to.currency)
     }
     public func subtract(_ from: Money) -> Money {
-        var fromMoney = from
         if (self.currency != from.currency) {
-            fromMoney = self.convert(from.currency)
+            from = self.convert(from.currency)
         }
-        return Money(amount: self.amount - from.amount, currency: fromMoney.currency)
+        return Money(amount: self.amount - from.amount, currency: from.currency)
     }
 }
 
