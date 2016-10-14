@@ -87,9 +87,16 @@ open class Job {
     }
     
     public init(title : String, type : JobType) {
+        self.title = title
+        self.type = JobType
     }
     
     open func calculateIncome(_ hours: Int) -> Int {
+        if (self.type == JobType.Hourly(pay: Double)) {
+            
+        } else {
+            
+        }
     }
     
     open func raise(_ amt : Double) {
