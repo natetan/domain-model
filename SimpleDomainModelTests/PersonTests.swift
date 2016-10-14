@@ -6,6 +6,7 @@
 //  Copyright © 2016 Ted Neward. All rights reserved.
 //
 
+/* uncomment to test
 import XCTest
 
 class PersonTests: XCTestCase {
@@ -71,3 +72,5 @@ class FamilyTests : XCTestCase {
   }
   
 }
+ 
+ */

@@ -33,11 +33,21 @@ public struct Money {
     }
     
     public func convert(_ to: String) -> Money {
-        var money = self.amount
-        if (to != "USD") {
+        var money = self.amount // 10 USD
+        
+        if (to != "USD") { // from USD
             if (to == "GBP") {
-                money = money * 2
+                money = money / 2
             } else if (to == "EUR") {
+                money = money * 3 / 2
+            } else {
+                money = money * 5 / 4
+            }
+        } else { // to USD
+            let curr = self.currency
+            if (curr == "GBP") {
+                money = money * 2
+            } else if (curr == "EUR") {
                 money = money * 2 / 3
             } else {
                 money = money * 4 / 5
@@ -47,18 +57,20 @@ public struct Money {
     }
     
     public func add(_ to: Money) -> Money {
+        var toAmount = Money(amount: self.amount, currency: self.currency)
         if (self.currency != to.currency) {
-            to = self.convert(to.currency)
+            toAmount = self.convert(to.currency)
         }
-        return Money(amount: self.amount + to.amount, currency: to.currency)
+        return Money(amount: toAmount.amount + to.amount, currency: toAmount.currency)
     }
+    
     public func subtract(_ from: Money) -> Money {
+        var fromAmount = Money(amount: self.amount, currency: self.currency)
         if (self.currency != from.currency) {
-            from = self.convert(from.currency)
+            fromAmount = self.convert(from.currency)
         }
-        return Money(amount: self.amount - from.amount, currency: from.currency)
-    }
-}
+        return Money(amount: fromAmount.amount + from.amount, currency: fromAmount.currency)
+    }}
 
 /*
 
