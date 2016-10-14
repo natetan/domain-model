@@ -92,14 +92,25 @@ open class Job {
     }
     
     open func calculateIncome(_ hours: Int) -> Int {
-        if (self.type == JobType.Hourly(pay: Double)) {
-            
-        } else {
-            
+        switch self.type {
+        case .Hourly(var pay) :
+            return Int(pay * Double(hours))
+        case .Salary(var salary) :
+            return salary
+        default :
+            return 0
         }
     }
     
     open func raise(_ amt : Double) {
+        switch self.type {
+        case .Hourly(var pay) :
+            self.type = JobType.Hourly(pay + amt)
+        case .Salary(var salary) :
+            self.type = JobType.Salary(salary + amt)
+        default :
+            print("Nothing happened")
+        }
     }
 }
 /*
