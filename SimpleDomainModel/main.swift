@@ -72,7 +72,7 @@ public struct Money {
         return Money(amount: fromAmount.amount + from.amount, currency: fromAmount.currency)
     }}
 
-/*
+
 
 ////////////////////////////////////
 // Job
@@ -95,7 +95,7 @@ open class Job {
     open func raise(_ amt : Double) {
     }
 }
-
+/*
 ////////////////////////////////////
 // Person
 //
