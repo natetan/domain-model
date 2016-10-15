@@ -88,7 +88,7 @@ open class Job {
     
     public init(title : String, type : JobType) {
         self.title = title
-        self.type = JobType
+        self.type = type
     }
     
     open func calculateIncome(_ hours: Int) -> Int {
@@ -107,13 +107,13 @@ open class Job {
         case .Hourly(var pay) :
             self.type = JobType.Hourly(pay + amt)
         case .Salary(var salary) :
-            self.type = JobType.Salary(salary + amt)
+            self.type = JobType.Salary(salary + Int(amt))
         default :
             print("Nothing happened")
         }
     }
 }
-/*
+
 ////////////////////////////////////
 // Person
 //
@@ -124,15 +124,21 @@ open class Person {
     
     fileprivate var _job : Job? = nil
     open var job : Job? {
-        get { }
+        get { return _job}
         set(value) {
+            if (self.age >= 16) {
+                _job = value
+            }
         }
     }
     
     fileprivate var _spouse : Person? = nil
     open var spouse : Person? {
-        get { }
+        get { return _spouse}
         set(value) {
+            if (self.age >= 18) {
+                _spouse = value
+            }
         }
     }
     
@@ -143,6 +149,7 @@ open class Person {
     }
     
     open func toString() -> String {
+        return "[Person: firstName:\(firstName) lastName:\(lastName) age:\(age) job:\(job) spouse:\(spouse)]"
     }
 }
 
@@ -153,16 +160,29 @@ open class Family {
     fileprivate var members : [Person] = []
     
     public init(spouse1: Person, spouse2: Person) {
+        spouse1.spouse = spouse2
+        spouse2.spouse = spouse1
+        self.members.append(spouse1)
+        self.members.append(spouse2)
     }
     
     open func haveChild(_ child: Person) -> Bool {
+        self.members.append(child)
+        return true
     }
     
     open func householdIncome() -> Int {
+        var income = 0
+        for person in self.members {
+            if (person.job != nil) {
+                income += (person.job?.calculateIncome(2000))!
+            }
+        }
+        return income
     }
 }
  
-*/
+
 
 
 
