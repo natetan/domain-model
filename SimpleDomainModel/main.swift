@@ -69,7 +69,7 @@ public struct Money {
         if (self.currency != from.currency) {
             fromAmount = self.convert(from.currency)
         }
-        return Money(amount: fromAmount.amount + from.amount, currency: fromAmount.currency)
+        return Money(amount: fromAmount.amount - from.amount, currency: fromAmount.currency)
     }}
 
 
